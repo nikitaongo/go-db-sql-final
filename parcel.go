@@ -74,6 +74,10 @@ func (s ParcelStore) GetByClient(client int) ([]Parcel, error) {
 		}
 		res = append(res, p)
 	}
+	if err := rows.Err(); err != nil {
+		log.Printf("rows loop was terminated not normally: %s", err)
+		return nil, err
+	}
 	return res, nil
 }
 
